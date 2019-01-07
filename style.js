@@ -2,10 +2,11 @@
 
 import { StyleSheet } from 'react-native';
 
-const PADDING = 8;
+const PADDING = 5;
 const BORDER_RADIUS = 5;
 const FONT_SIZE = 16;
 const HIGHLIGHT_COLOR = 'rgba(0,118,255,0.9)';
+const CONSTANT = require('../../constant');
 
 export default StyleSheet.create({
 
@@ -13,7 +14,7 @@ export default StyleSheet.create({
         flex:            1,
         padding:         '5%',
         justifyContent:  'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
+        backgroundColor: 'rgba(0,0,0,0.8)',
     },
 
     optionContainer: {
@@ -29,16 +30,18 @@ export default StyleSheet.create({
     },
 
     selectStyle: {
-        borderColor:  '#ccc',
-        borderWidth:  1,
-        padding:      PADDING,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        borderColor: 'gray', 
+        borderWidth: 1,
+        borderRadius: 5,
+        height: 30,
         borderRadius: BORDER_RADIUS,
     },
 
     selectTextStyle: {
-        textAlign: 'center',
-        color:     '#333',
-        fontSize:  FONT_SIZE,
+        fontSize:  CONSTANT.TEXTINPUT_FONT,
+        color: 'black'
     },
 
     cancelStyle: {
@@ -48,9 +51,8 @@ export default StyleSheet.create({
     },
 
     cancelTextStyle: {
-        textAlign: 'center',
-        color:     '#333',
-        fontSize:  FONT_SIZE,
+        alignSelf: 'center',
+        fontSize:  CONSTANT.TEXTINPUT_FONT,
     },
 
     optionStyle: {
@@ -61,7 +63,7 @@ export default StyleSheet.create({
 
     optionTextStyle: {
         textAlign: 'center',
-        fontSize:  FONT_SIZE,
+        fontSize:  CONSTANT.TEXTINPUT_FONT,
         color:     HIGHLIGHT_COLOR,
     },
 
@@ -73,6 +75,6 @@ export default StyleSheet.create({
 
     sectionTextStyle: {
         textAlign: 'center',
-        fontSize:  FONT_SIZE,
+        fontSize:  CONSTANT.TEXTINPUT_FONT,
     },
 });
