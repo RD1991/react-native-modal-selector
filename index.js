@@ -14,6 +14,7 @@ import {
     ViewPropTypes as RNViewPropTypes,
 } from 'react-native';
 
+const CONSTANT = require('../../constant');
 import styles from './style';
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
@@ -59,8 +60,6 @@ const propTypes = {
     scrollViewAccessibilityLabel:   PropTypes.string,
     cancelButtonAccessibilityLabel: PropTypes.string,
     passThruProps:                  PropTypes.object,
-    selectTextPassThruProps:        PropTypes.object,
-    optionTextPassThruProps:        PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
     customSelector:                 PropTypes.node,
 };
@@ -92,7 +91,7 @@ const defaultProps = {
     cancelStyle:                    {},
     cancelTextStyle:                {},
     overlayStyle:                   {},
-    cancelText:                     'cancel',
+    cancelText:                     'Cancel',
     disabled:                       false,
     supportedOrientations:          ['portrait', 'landscape'],
     keyboardShouldPersistTaps:      'always',
@@ -104,8 +103,6 @@ const defaultProps = {
     scrollViewAccessibilityLabel:   undefined,
     cancelButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
-    selectTextPassThruProps:        {},
-    optionTextPassThruProps:        {},
     modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
     customSelector:                 undefined,
 };
@@ -193,7 +190,8 @@ export default class ModalSelector extends React.Component {
             >
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
-                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle,isSelectedItem && this.props.selectedItemTextStyle]} {...this.props.optionTextPassThruProps}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle,
+                                 isSelectedItem && this.props.selectedItemTextStyle]}>
                         {optionLabel}
                     </Text>
                 </View>
@@ -218,7 +216,7 @@ export default class ModalSelector extends React.Component {
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
                         <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={this.props.scrollViewAccessible} accessibilityLabel={this.props.scrollViewAccessibilityLabel}>
-                            <View style={{paddingHorizontal: 10}}>
+                            <View style={{paddingHorizontal: 0}}>
                                 {options}
                             </View>
                         </ScrollView>
@@ -239,9 +237,17 @@ export default class ModalSelector extends React.Component {
         if(this.props.children) {
             return this.props.children;
         }
+
+        var local_styles = undefined;
+        if (this.state.selected == this.props.initValue) {
+            local_styles = {fontSize:  CONSTANT.TEXTINPUT_FONT, color: '#C0C0C0'};
+        } else {
+            local_styles = [styles.selectTextStyle, this.props.selectTextStyle];
+        }
+
         return (
             <View style={[styles.selectStyle, this.props.selectStyle]}>
-                <Text style={[styles.selectTextStyle, this.props.selectTextStyle]} {...this.props.selectTextPassThruProps}>{this.state.selected}</Text>
+                <Text style={local_styles}>{this.state.selected}</Text>
             </View>
         );
     }
